@@ -19,8 +19,8 @@ const Layout = ({ children, user, handleLogout }) => {
           <div>
             {user ? (
               <>
-                <button>프로필 테스트</button>
-                <button>결과 보기</button>
+                <Link to="/profile">프로필 수정</Link>
+                <Link to="/result">결과 보기</Link>
 
                 <button onClick={onLogout}>로그아웃</button>
               </>

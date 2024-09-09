@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Home = () => {
@@ -29,7 +30,7 @@ const Home = () => {
         </Box>
       </BoxContainer>
       <BtnContainer>
-        <TestBtn>무료 테스트 시작</TestBtn>
+        <TestBtn to="/test">무료 테스트 시작</TestBtn>
       </BtnContainer>
     </div>
   );
@@ -59,7 +60,7 @@ const BtnContainer = styled.div`
   height: 100px;
 `;
 
-const TestBtn = styled.button`
+const TestBtn = styled(Link)`
   border: 1px soliㅇ black;
   border-radius: 5px;
   background-color: green;

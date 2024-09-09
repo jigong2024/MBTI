@@ -3,31 +3,35 @@ import { authClient } from "./authClient";
 // 회원가입
 export const register = async (userData) => {
   const response = await authClient.post("/register", userData);
-  console.log(response.data);
   return response.data;
 };
 
 // 로그인
-export const login = async (userData) => {
-  const response = await authClient.post("/login", userData);
+export const login = async (userData, expiresIn) => {
+  const url = expiresIn ? "/login?expiresIn=${expiresIn}" : "/login";
+  const response = await authClient.post(url, userData);
   return response.data;
 };
 
-// 프로필
+// 프로필 조회
 export const getUserProfile = async (token) => {
-  const response = await authClient.get("/profile", {
+  const response = await authClient.get("/user", {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;
 };
 
-// 업데이트 프로필
-export const updateProfile = async (token, formData) => {
-  const response = await authClient.patch("/profile", formData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
+// 프로필 업데이트 (닉네임만)
+export const updateProfile = async (token, nickname) => {
+  const response = await authClient.patch(
+    "/profile",
+    { nickname },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
   return response.data;
 };

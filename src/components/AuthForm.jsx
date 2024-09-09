@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const AuthForm = ({ mode, onSubmit }) => {
   const [formData, setFormData] = useState({
     id: "",
-    pw: "",
+    password: "",
     nickname: "",
   });
 
@@ -19,7 +19,9 @@ const AuthForm = ({ mode, onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const submitData =
-      mode === "login" ? { id: formData.id, pw: formData.pw } : formData;
+      mode === "login"
+        ? { id: formData.id, password: formData.password }
+        : formData;
     onSubmit(submitData);
   };
 
@@ -39,12 +41,12 @@ const AuthForm = ({ mode, onSubmit }) => {
           />
         </div>
         <div>
-          <label htmlFor="pw">비밀번호</label>
+          <label htmlFor="password">비밀번호</label>
           <input
             type="password"
-            id="pw"
-            name="pw"
-            value={formData.pw}
+            id="password"
+            name="password"
+            value={formData.password}
             onChange={handleChange}
             placeholder="비밀번호"
             required
