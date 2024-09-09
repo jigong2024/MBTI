@@ -194,7 +194,7 @@ const App = () => {
           path="/result"
           element={
             <ProtectedRoute user={user}>
-              <TestResultPage />
+              <TestResultPage user={user} />
             </ProtectedRoute>
           }
         />
