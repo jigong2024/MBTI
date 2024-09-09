@@ -3,6 +3,7 @@ import { authClient } from "./authClient";
 // 회원가입
 export const register = async (userData) => {
   const response = await authClient.post("/register", userData);
+  console.log(response.data);
   return response.data;
 };
 
@@ -25,7 +26,7 @@ export const updateProfile = async (token, formData) => {
   const response = await authClient.patch("/profile", formData, {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "application/json",
     },
   });
   return response.data;
