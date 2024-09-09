@@ -1,13 +1,20 @@
-import { useState } from "react";
 import { questions } from "../data/questions";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { createTestResult } from "../api/testResults";
 
-const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
+const TestForm = ({
+  handleAnswer,
+  calculateMBTI,
+  answers,
+  setResult,
+  user,
+}) => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // console.log("user", user);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(answers).length === questions.length) {
       const answersArray = questions.map((q) => answers[q.id]);
@@ -17,7 +24,7 @@ const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
         userId: user.id,
         nickname: user.nickname,
         result: mbtiResult,
-        answer: answersArray,
+        answers: answersArray,
         date: new Date().toISOString(),
         visibility: true,
       };
@@ -27,8 +34,8 @@ const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
         setResult(mbtiResult);
         navigate("/result");
       } catch (error) {
-        console.error("Error submitting test result:", error)
-          alert("결과 제출 중 오류가 발생했습니다. 다시 시도해 주세요!"):
+        console.error("Error submitting test result:", error);
+        alert("결과 제출 중 오류가 발생했습니다. 다시 시도해 주세요!");
       }
     } else {
       alert("모든 질문에 답해주세요!");
@@ -44,14 +51,14 @@ const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
             <div>
               {q.options.map((option) => (
                 // 버튼
-                <SeletBtn
+                <SelectBtn
                   key={option}
                   type="button"
                   onClick={() => handleAnswer(q.id, option)}
                   btnColor={answers[q.id] === option ? "lightblue" : "white"}
                 >
                   {option}
-                </SeletBtn>
+                </SelectBtn>
               ))}
             </div>
           </div>
@@ -64,10 +71,9 @@ const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
 
 export default TestForm;
 
-const SeletBtn = styled.button`
+const SelectBtn = styled.button`
   padding: 10px 20px;
   margin: 5px;
-  background-color: white;
   border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;

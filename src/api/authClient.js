@@ -5,5 +5,5 @@ export const authClient = axios.create({
 });
 
 export const resultClient = axios.create({
-  baseURL: "http://localhost:5000/testResults",
+  baseURL: "http://localhost:3000/testResults",
 });

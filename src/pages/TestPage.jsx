@@ -41,6 +41,7 @@ const TestPage = ({ user }) => {
         handleAnswer={handleAnswer}
         answers={answers}
         setResult={setResult}
+        user={user}
       />
     </div>
   );
