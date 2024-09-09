@@ -9,7 +9,7 @@ const TestResultList = ({ results, user, refreshResults }) => {
           <TestResultItem
             key={result.id}
             result={result}
-            user={user}
+            currentUser={user}
             refreshResults={refreshResults}
           />
         ))}
