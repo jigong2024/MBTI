@@ -7,9 +7,8 @@ export const register = async (userData) => {
 };
 
 // 로그인
-export const login = async (userData, expiresIn) => {
-  const url = expiresIn ? "/login?expiresIn=${expiresIn}" : "/login";
-  const response = await authClient.post(url, userData);
+export const login = async (userData) => {
+  const response = await authClient.post("/login", userData);
   return response.data;
 };
 
