@@ -53,3 +53,24 @@
 5. TestResult Page
 
 - MBTI 테스트 결과 목록 제공
+
+## 프로젝트 구조
+
+src/
+├── components/
+│ ├── Header.js
+│ ├── AuthForm.js
+│ └── ...
+├── pages/
+│ ├── Home.js
+│ ├── Login.js
+│ ├── Signup.js
+│ ├── Profile.js
+│ ├── Test.js
+│ └── TestResult.js
+├── api/
+│ ├── auth.js
+│ └── test.js
+├── contexts/
+│ └── AuthContext.js
+└── App.js
