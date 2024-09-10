@@ -56,6 +56,7 @@
 
 ## 프로젝트 구조
 
+```
 src/
 ├── components/
 │ ├── Header.js
@@ -74,3 +75,4 @@ src/
 ├── contexts/
 │ └── AuthContext.js
 └── App.js
+```
