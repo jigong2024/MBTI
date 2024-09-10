@@ -52,7 +52,7 @@ const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
                   key={option}
                   type="button"
                   onClick={() => handleAnswer(q.id, option)}
-                  btnColor={answers[q.id] === option ? "lightblue" : "white"}
+                  $btnColor={answers[q.id] === option ? "lightblue" : "white"}
                 >
                   {option}
                 </SelectBtn>
@@ -74,5 +74,5 @@ const SelectBtn = styled.button`
   border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
-  background-color: ${({ btnColor }) => btnColor};
+  background-color: ${({ $btnColor }) => $btnColor};
 `;

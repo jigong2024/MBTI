@@ -10,6 +10,7 @@ import TestResultPage from "./pages/TestResultPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { getUserProfile, login, register, updateProfile } from "./api/auth";
 import AuthContext from "./context/authContext";
+import "./App.css";
 
 const App = () => {
   const [user, setUser] = useState(null);

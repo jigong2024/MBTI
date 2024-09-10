@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div>
+    <div className="content">
       <header>
         <nav>
           <Link to="/">홈</Link>
