@@ -13,37 +13,19 @@ import AuthContext from "./context/authContext";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    // console.log("stored token", token);
-
-    fetchUserProfile(token);
+    if (token) {
+      fetchUserProfile(token);
+    } else {
+      setLoading(false);
+    }
   }, []);
 
-  // 사용자 프로필 정보를 가져오는 함수
-  const fetchUserProfile = async (token) => {
-    try {
-      const userProfile = await getUserProfile(token);
-      // console.log("유저 정보", userProfile);
-
-      if (userProfile.success) {
-        setUser({
-          id: userProfile.id,
-          nickname: userProfile.nickname,
-        });
-        // console.log("유저", user);
-      } else {
-        throw new Error("Failed to fetch user profile");
-      }
-    } catch (error) {
-      console.error("Failed to fetch user profile", error);
-      localStorage.removeItem("authToken");
-      setUser(null);
-    }
-  };
-
+  // 회원가입 로직
   const handleSignup = async (userData) => {
     try {
       await register(userData);
@@ -54,11 +36,10 @@ const App = () => {
     }
   };
 
+  // 로그인 로직
   const handleLogin = async (userData) => {
     try {
-      // console.log("유저데이터", userData);
       const response = await login(userData);
-      // console.log(response);
       localStorage.setItem("authToken", response.accessToken);
 
       await fetchUserProfile(response.accessToken);
@@ -69,19 +50,32 @@ const App = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    setUser(null);
-    navigate("/login");
-    alert("로그아웃 되었습니다!");
+  // 로그인 후, 프로필 정보 가져오는 로직
+  const fetchUserProfile = async (token) => {
+    try {
+      const userProfile = await getUserProfile(token);
+
+      if (userProfile.success) {
+        setUser({
+          id: userProfile.id,
+          nickname: userProfile.nickname,
+        });
+      } else {
+        throw new Error("Failed to fetch user profile");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("프로필 정보 가져오는데 실패하였습니다. 다시 시도해 주세요.");
+    } finally {
+      setLoading(false);
+    }
   };
 
+  // 프로필 업데이트 로직
   const handleUpdateProfile = async (nickname) => {
     try {
       const token = localStorage.getItem("authToken");
-      // API 호출하여 프로필 업데이트 (닉네임만)
       const updatedProfile = await updateProfile(token, nickname);
-      // 업데이트된 정보로 user 상태 갱신
       setUser((prevUser) => ({
         ...prevUser,
         nickname: updatedProfile.nickname,
@@ -92,6 +86,20 @@ const App = () => {
       alert("닉네임 업데이트에 실패했습니다. 다시 시도해주세요.");
     }
   };
+
+  // 로그아웃 로직
+  const handleLogout = (showAlert = true) => {
+    localStorage.removeItem("authToken");
+    setUser(null);
+    navigate("/login");
+    if (showAlert) {
+      alert("로그아웃 되었습니다!");
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider
