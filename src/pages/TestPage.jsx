@@ -2,7 +2,7 @@ import TestForm from "../components/TestForm";
 import { useState } from "react";
 import { questions } from "../data/questions";
 
-const TestPage = ({ user }) => {
+const TestPage = () => {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
 
@@ -41,7 +41,6 @@ const TestPage = ({ user }) => {
         handleAnswer={handleAnswer}
         answers={answers}
         setResult={setResult}
-        user={user}
       />
     </div>
   );

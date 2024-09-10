@@ -2,14 +2,11 @@ import { questions } from "../data/questions";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { createTestResult } from "../api/testResults";
+import { useContext } from "react";
+import AuthContext from "../context/authContext";
 
-const TestForm = ({
-  handleAnswer,
-  calculateMBTI,
-  answers,
-  setResult,
-  user,
-}) => {
+const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // console.log("user", user);

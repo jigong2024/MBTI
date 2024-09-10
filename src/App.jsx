@@ -8,7 +8,8 @@ import Profile from "./pages/Profile";
 import TestPage from "./pages/TestPage";
 import TestResultPage from "./pages/TestResultPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { getUserProfile, login, register } from "./api/auth";
+import { getUserProfile, login, register, updateProfile } from "./api/auth";
+import AuthContext from "./context/authContext";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -75,41 +76,65 @@ const App = () => {
     alert("로그아웃 되었습니다!");
   };
 
+  const handleUpdateProfile = async (nickname) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      // API 호출하여 프로필 업데이트 (닉네임만)
+      const updatedProfile = await updateProfile(token, nickname);
+      // 업데이트된 정보로 user 상태 갱신
+      setUser((prevUser) => ({
+        ...prevUser,
+        nickname: updatedProfile.nickname,
+      }));
+      alert("닉네임이 업데이트되었습니다!");
+    } catch (error) {
+      console.error("Profile update failed", error);
+      alert("닉네임 업데이트에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
   return (
-    <Layout user={user} handleLogout={handleLogout}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-        <Route
-          path="/signup"
-          element={<Signup handleSignup={handleSignup} />}
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute user={user}>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/test"
-          element={
-            <ProtectedRoute user={user}>
-              <TestPage user={user} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/result"
-          element={
-            <ProtectedRoute user={user}>
-              <TestResultPage user={user} />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Layout>
+    <AuthContext.Provider
+      value={{
+        user,
+        handleLogin,
+        handleLogout,
+        handleSignup,
+        handleUpdateProfile,
+      }}
+    >
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/test"
+            element={
+              <ProtectedRoute>
+                <TestPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/result"
+            element={
+              <ProtectedRoute>
+                <TestResultPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Layout>
+    </AuthContext.Provider>
   );
 };
 

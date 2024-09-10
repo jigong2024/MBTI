@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { deleteTestResult, updateTestResult } from "../api/testResults";
+import AuthContext from "../context/authContext";
 
 const mbtiDescriptions = {
   ISTJ: "책임감 있고 신뢰할 수 있으며, 전통적이고 실용적인 사고방식을 가지고 있습니다.",
@@ -19,8 +21,10 @@ const mbtiDescriptions = {
   ENTJ: "결단력 있고 목표 지향적이며, 리더십을 발휘합니다.",
 };
 
-const TestResultItem = ({ result, currentUser, refreshResults }) => {
-  const isOwner = result.userId === currentUser.id;
+const TestResultItem = ({ result, refreshResults }) => {
+  const { user } = useContext(AuthContext);
+
+  const isOwner = result.userId === user.id;
   const formattedDate = new Date(result.date).toLocaleString();
   const description =
     mbtiDescriptions[result.result] || "MBTI 유형 설명을 찾을 수 없습니다.";
@@ -49,7 +53,7 @@ const TestResultItem = ({ result, currentUser, refreshResults }) => {
   return (
     <div>
       <div>
-        <h4>{isOwner ? currentUser.nickname : result.nickname}</h4>
+        <h4>{isOwner ? user.nickname : result.nickname}</h4>
         <p>{formattedDate}</p>
       </div>
       <p>{result.result}</p>

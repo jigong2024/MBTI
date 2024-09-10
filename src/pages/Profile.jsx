@@ -1,32 +1,21 @@
-import { useEffect, useState } from "react";
-import { getUserProfile, updateProfile } from "../api/auth";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../context/authContext";
 
 const Profile = () => {
+  const { user, handleUpdateProfile } = useContext(AuthContext);
   const [nickname, setNickname] = useState("");
 
-  const fetchProfile = async () => {
-    try {
-      const token = localStorage.getItem("authToken");
-      const userData = await getUserProfile(token);
-      setNickname(userData.nickname);
-    } catch (error) {
-      console.error("닉네임 불러오기 실패", error);
-      alert("닉네임 불러오기 실패!");
-    }
-  };
-
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if (user) {
+      setNickname(user.nickname);
+    }
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem("authToken");
-      await updateProfile(token, nickname);
-      alert("닉네임이 성공적으로 업데이트 되었습니다!");
-      await fetchProfile();
+      await handleUpdateProfile(nickname);
     } catch (error) {
       console.error("닉네임 업데이트 실패", error);
       alert("닉네임 업데이트 실패!");

@@ -1,9 +1,9 @@
 import AuthForm from "../components/AuthForm";
 
-const Login = ({ handleLogin }) => {
+const Login = () => {
   return (
     <div>
-      <AuthForm mode="login" onSubmit={handleLogin} />
+      <AuthForm mode="login" />
     </div>
   );
 };

@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../context/authContext";
 
-const Layout = ({ children, user, handleLogout }) => {
+const Layout = ({ children }) => {
   const navigate = useNavigate();
+  const { user, handleLogout } = useContext(AuthContext);
 
   useEffect(() => {}, []);
 

@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import TestResultItem from "./TestResultItem";
+import AuthContext from "../context/authContext";
 
-const TestResultList = ({ results, user, refreshResults }) => {
+const TestResultList = ({ results, refreshResults }) => {
+  const { user } = useContext(AuthContext);
   return (
     <div>
       {results
@@ -9,7 +12,7 @@ const TestResultList = ({ results, user, refreshResults }) => {
           <TestResultItem
             key={result.id}
             result={result}
-            currentUser={user}
+            // currentUser={user}
             refreshResults={refreshResults}
           />
         ))}

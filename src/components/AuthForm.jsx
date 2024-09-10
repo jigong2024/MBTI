@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/authContext";
 
-const AuthForm = ({ mode, onSubmit }) => {
+const AuthForm = ({ mode }) => {
+  const { handleLogin, handleSignup } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     id: "",
     password: "",
@@ -19,11 +22,12 @@ const AuthForm = ({ mode, onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const submitData =
-      mode === "login"
-        ? { id: formData.id, password: formData.password }
-        : formData;
-    onSubmit(submitData);
+    if (mode === "login") {
+      const loginData = { id: formData.id, password: formData.password };
+      handleLogin(loginData);
+    } else if (mode === "signup") {
+      handleSignup(formData);
+    }
   };
 
   return (
