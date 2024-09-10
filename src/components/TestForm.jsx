@@ -47,7 +47,6 @@ const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
             <p>{q.question}</p>
             <div>
               {q.options.map((option) => (
-                // 버튼
                 <SelectBtn
                   key={option}
                   type="button"
@@ -88,7 +87,7 @@ const BtnContainer = styled.div`
   padding-right: 10px;
 `;
 
-const TestBtn = styled(Link)`
+const TestBtn = styled.button`
   text-decoration: none;
   border-radius: 10px;
   background-color: #007bff;

@@ -117,17 +117,8 @@ const Description = styled.p`
   margin-bottom: 15px;
 `;
 
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-`;
-
 const StyledButton = styled.button`
-  /* padding: 8px 12px; */
-  /* border: none; */
   border-radius: 5px;
-  /* font-size: 14px; */
   cursor: pointer;
   transition: all 0.3s ease;
   background-color: ${(props) => (props.delete ? "#ff6b6b" : "#4a90e2")};
