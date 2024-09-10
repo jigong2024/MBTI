@@ -1,6 +1,5 @@
-/* Google Fonts import */
 @import url("https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Single+Day&display=swap");
-/* 기존의 전역 스타일 */
+
 body,
 html {
   margin: 0;
@@ -10,17 +9,4 @@ html {
   font-family: "Gamja Flower", sans-serif;
   font-weight: 400;
   font-style: normal;
-}
-
-#root {
-  min-height: 100vh;
-  background-image: url("/images/background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-.content {
-  position: relative;
 }

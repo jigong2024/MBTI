@@ -66,7 +66,7 @@ const App = () => {
       }
     } catch (error) {
       console.error(error);
-      alert("프로필 정보 가져오는데 실패하였습니다. 다시 시도해 주세요.");
+      // alert("프로필 정보 가져오는데 실패하였습니다. 다시 시도해 주세요.");
     } finally {
       setLoading(false);
     }
