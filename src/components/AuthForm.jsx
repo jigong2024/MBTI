@@ -18,6 +18,7 @@ const AuthForm = ({ mode, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const submitData =
       mode === "login"
         ? { id: formData.id, password: formData.password }

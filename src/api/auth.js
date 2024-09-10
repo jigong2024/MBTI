@@ -1,4 +1,4 @@
-import { authClient } from "./authClient";
+import { authClient } from "./client";
 
 // 회원가입
 export const register = async (userData) => {

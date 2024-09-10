@@ -1,4 +1,4 @@
-import { resultClient } from "./authClient";
+import { resultClient } from "./client";
 
 export const getTestResults = async () => {
   const response = await resultClient.get("/");
