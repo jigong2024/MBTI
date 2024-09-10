@@ -5,12 +5,12 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
-import TestPage from "./pages/TestPage";
-import TestResultPage from "./pages/TestResultPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { getUserProfile, login, register, updateProfile } from "./api/auth";
 import AuthContext from "./context/authContext";
 import "./App.css";
+import Test from "./pages/Test";
+import TestResult from "./pages/TestResult";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -129,7 +129,7 @@ const App = () => {
             path="/test"
             element={
               <ProtectedRoute>
-                <TestPage />
+                <Test />
               </ProtectedRoute>
             }
           />
@@ -137,7 +137,7 @@ const App = () => {
             path="/result"
             element={
               <ProtectedRoute>
-                <TestResultPage />
+                <TestResult />
               </ProtectedRoute>
             }
           />

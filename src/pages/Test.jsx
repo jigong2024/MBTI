@@ -2,7 +2,7 @@ import TestForm from "../components/TestForm";
 import { useState } from "react";
 import { questions } from "../data/questions";
 
-const TestPage = () => {
+const Test = () => {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
 
@@ -46,4 +46,4 @@ const TestPage = () => {
   );
 };
 
-export default TestPage;
+export default Test;

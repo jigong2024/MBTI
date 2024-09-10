@@ -3,7 +3,7 @@ import { getTestResults } from "../api/testResults";
 import TestResultList from "../components/TestResultList";
 import AuthContext from "../context/authContext";
 
-const TestResultPage = () => {
+const TestResult = () => {
   const { user } = useContext(AuthContext);
   const [results, setResults] = useState([]);
 
@@ -30,4 +30,4 @@ const TestResultPage = () => {
   );
 };
 
-export default TestResultPage;
+export default TestResult;
