@@ -1,6 +1,6 @@
 import { questions } from "../data/questions";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createTestResult } from "../api/testResults";
 import { useContext } from "react";
 import AuthContext from "../context/authContext";
@@ -60,7 +60,9 @@ const TestForm = ({ handleAnswer, calculateMBTI, answers, setResult }) => {
             </div>
           </div>
         ))}
-        <button type="submit">제출하기</button>
+        <BtnContainer>
+          <TestBtn type="submit">제출하기</TestBtn>
+        </BtnContainer>
       </form>
     </div>
   );
@@ -71,8 +73,35 @@ export default TestForm;
 const SelectBtn = styled.button`
   padding: 10px 20px;
   margin: 5px;
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
   cursor: pointer;
   background-color: ${({ $btnColor }) => $btnColor};
+`;
+
+const BtnContainer = styled.div`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+`;
+
+const TestBtn = styled(Link)`
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #007bff;
+  padding: 12px 20px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 `;

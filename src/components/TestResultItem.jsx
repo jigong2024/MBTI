@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { deleteTestResult, updateTestResult } from "../api/testResults";
 import AuthContext from "../context/authContext";
+import styled from "styled-components";
 
 const mbtiDescriptions = {
   ISTJ: "책임감 있고 신뢰할 수 있으며, 전통적이고 실용적인 사고방식을 가지고 있습니다.",
@@ -51,23 +52,88 @@ const TestResultItem = ({ result, refreshResults }) => {
   };
 
   return (
-    <div>
-      <div>
+    <ResultBox>
+      <Header>
         <h4>{isOwner ? user.nickname : result.nickname}</h4>
-        <p>{formattedDate}</p>
-      </div>
-      <p>{result.result}</p>
-      <p>{description}</p>
+        <Nowdate>{formattedDate}</Nowdate>
+      </Header>
+      <MBTIResult>{result.result}</MBTIResult>
+      <Description>{description}</Description>
       {isOwner && (
-        <div>
-          <button onClick={handleToggleVisibility}>
+        <Header>
+          <StyledButton onClick={handleToggleVisibility}>
             {result.visibility ? "비공개로 전환" : "공개로 전환"}
-          </button>
-          <button onClick={handleDelete}>삭제</button>
-        </div>
+          </StyledButton>
+          <StyledButton onClick={handleDelete} delete>
+            삭제
+          </StyledButton>
+        </Header>
       )}
-    </div>
+    </ResultBox>
   );
 };
 
 export default TestResultItem;
+
+const ResultBox = styled.div`
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    background-color: #007bff77;
+  }
+`;
+
+const Header = styled.div`
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+`;
+
+const Nowdate = styled.p`
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #777;
+`;
+
+const MBTIResult = styled.p`
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a90e2;
+  margin: 0;
+`;
+
+const Description = styled.p`
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+`;
+
+const StyledButton = styled.button`
+  /* padding: 8px 12px; */
+  /* border: none; */
+  border-radius: 5px;
+  /* font-size: 14px; */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: ${(props) => (props.delete ? "#ff6b6b" : "#4a90e2")};
+  color: white;
+
+  &:hover {
+    background-color: black;
+  }
+`;

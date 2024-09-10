@@ -61,7 +61,7 @@ const ContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   max-height: 700px;
-  min-width: 1000px;
+  max-width: 700;
 `;
 
 const Container = styled.div`
@@ -71,8 +71,8 @@ const Container = styled.div`
 
   background-color: rgba(255, 255, 255, 0.9);
   padding: 10px 20px;
-  width: 100%;
-  min-height: 600px;
+  min-width: 700px;
+  min-height: 700px;
   overflow-y: auto;
   border-radius: 20px;
   box-shadow: 0 4px 6px black(0, 0, 0, 0.8);
